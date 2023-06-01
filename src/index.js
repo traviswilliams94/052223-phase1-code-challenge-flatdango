@@ -33,11 +33,13 @@ document.getElementById('buy-ticket').addEventListener('click', () => updateTick
 //add function to update tickets
 
 function updateTickets(film){
-    if(film.tickets_sold < 30){
+    if(film.tickets_sold < film.capacity){
         film.tickets_sold+= 1
         document.getElementById('ticket-num').textContent = film.capacity - film.tickets_sold
     }
 }
+
+// hacky way below
 
 // function updateTickets(gilaAvailable){
 //     if (gilaAvailable.textContent === '3'){
@@ -63,7 +65,7 @@ function addMovieTitles(film){
 
 // first fetch to pullmovie #1onto the page
 
-function getFirstMovie(film){
+function getFirstMovie(){
     fetch('http://localhost:3000/films/1')
     .then(res => res.json())
     .then(film => displayFirstMovie(film))
