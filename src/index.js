@@ -6,22 +6,22 @@ function displayFirstMovie(film){
  
 
     let posterImage = document.getElementById('poster')
-    posterImage.src = `${film.poster}`
+    posterImage.src = film.poster
 
     let gilaTitle = document.getElementById('title')
-    gilaTitle.textContent = `${film.title}`
+    gilaTitle.textContent = film.title
 
     let gilaRunTime = document.getElementById('runtime')
-    gilaRunTime.textContent = `${film.runtime}`
+    gilaRunTime.textContent = `${film.runtime} minutes`
 
     let gilaShowTime = document.getElementById('showtime')
-    gilaShowTime.textContent = `${film.showtime}`
+    gilaShowTime.textContent = film.showtime
 
     let gilaDescription = document.getElementById('film-info')
-    gilaDescription.textContent = `${film.description}`
+    gilaDescription.textContent = film.description
 
     let gilaAvailable = document.getElementById('ticket-num')
-    gilaAvailable.textContent = `${film.capacity - film.tickets_sold}`
+    gilaAvailable.textContent = film.capacity - film.tickets_sold
     
 
     //add event listener for buy button
@@ -35,7 +35,7 @@ document.getElementById('buy-ticket').addEventListener('click', () => updateTick
 function updateTickets(film){
     if(film.tickets_sold < 30){
         film.tickets_sold+= 1
-        document.getElementById('ticket-num').textContent = `${film.capacity - film.tickets_sold}`
+        document.getElementById('ticket-num').textContent = film.capacity - film.tickets_sold
     }
 }
 
