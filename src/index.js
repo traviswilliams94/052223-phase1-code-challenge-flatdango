@@ -3,44 +3,53 @@
 //function to display first movie
 
 function displayFirstMovie(film){
+ 
+
     let posterImage = document.getElementById('poster')
-    posterImage.src = "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg"
+    posterImage.src = `${film.poster}`
 
     let gilaTitle = document.getElementById('title')
-    gilaTitle.textContent = "The Giant Gila Monster"
+    gilaTitle.textContent = `${film.title}`
 
     let gilaRunTime = document.getElementById('runtime')
-    gilaRunTime.textContent = "108 minutes"
+    gilaRunTime.textContent = `${film.runtime}`
 
     let gilaShowTime = document.getElementById('showtime')
-    gilaShowTime.textContent = "04:00PM"
+    gilaShowTime.textContent = `${film.showtime}`
 
     let gilaDescription = document.getElementById('film-info')
-    gilaDescription.textContent = 'A giant lizard terrorizes a rural Texas community and a heroic teenager attempts to destroy the creature.'
+    gilaDescription.textContent = `${film.description}`
 
     let gilaAvailable = document.getElementById('ticket-num')
-    gilaAvailable.textContent = '3'
+    gilaAvailable.textContent = `${film.capacity - film.tickets_sold}`
     
 
     //add event listener for buy button
 
-document.getElementById('buy-ticket').addEventListener('click', () => updateTickets(gilaAvailable))
+document.getElementById('buy-ticket').addEventListener('click', () => updateTickets(film))
 }
 
 
 //add function to update tickets
 
-function updateTickets(gilaAvailable){
-    if (gilaAvailable.textContent === '3'){
-    gilaAvailable.textContent = '2'
+function updateTickets(film){
+    if(film.tickets_sold < 30){
+        film.tickets_sold+= 1
+        document.getElementById('ticket-num').textContent = `${film.capacity - film.tickets_sold}`
+    }
 }
-else if (gilaAvailable.textContent === '2'){
-    gilaAvailable.textContent = '1'
-}
-else if(gilaAvailable.textContent === '1'){
-    gilaAvailable.textContent = '0'
-}
-}
+
+// function updateTickets(gilaAvailable){
+//     if (gilaAvailable.textContent === '3'){
+//     gilaAvailable.textContent = '2'
+// }
+// else if (gilaAvailable.textContent === '2'){
+//     gilaAvailable.textContent = '1'
+// }
+// else if(gilaAvailable.textContent === '1'){
+//     gilaAvailable.textContent = '0'
+// }
+// }
 
 //function to displaymovie titles
 
@@ -57,7 +66,7 @@ function addMovieTitles(film){
 function getFirstMovie(film){
     fetch('http://localhost:3000/films/1')
     .then(res => res.json())
-    .then(displayFirstMovie(film))
+    .then(film => displayFirstMovie(film))
 }
 
 //second fetch to display movie titles
